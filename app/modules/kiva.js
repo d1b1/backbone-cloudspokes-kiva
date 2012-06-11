@@ -16,9 +16,15 @@ function(app, Backbone, Views) {
 
   Kiva.Model = Backbone.Model.extend({
 
-    defaults: {
-      done: false,
-      name: ''
+    requestBin: function() {
+      var $this = this;
+
+      $.post('http://requestb.in/1i9g7vo1',
+        $this.toJSON(),
+        function() { alert('asdf'); },
+        'json'
+      );
+
     }
 
   });

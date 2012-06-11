@@ -40,6 +40,7 @@ function(app, $, Backbone, Kiva) {
 
       // Fetch the data from localStorage
       list.fetch();
+
     }
   });
 

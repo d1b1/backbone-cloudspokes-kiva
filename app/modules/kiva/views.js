@@ -14,37 +14,55 @@ function(app, Backbone) {
 
     tagName: 'tr',
 
+    // bind the methods to form elements.
     events: {
       "keyup input[type=text]": "updateOnEnter",
       "focus input[type=text]": "setSelected"
     },
 
+    // This is called each time the input is clicked
+    // to set the focused.
     setSelected: function(evt, ui) {
 
-      this.table.selected = this.model.id;
+      
+      // this.table.selected = this.model.id;
 
-      console.log(this.table.selected,'setting selected');
+      console.log(this.table,'setting selected', this.model.id);
     },
 
+    // Sets a default values for the model.
     hasTime: false,
 
     updateOnEnter: function(evt, ui) {
 
       var $this = this;
-      if ($this.hasTime == false) {
 
+      // hasTime can only be enabled once per model.
+      // This prevents multiple updates per input
+      // element.
+
+      if ($this.hasTime == false) {
         $this.hasTime = true;
 
-        timeout = setTimeout(function() {
+        // Set a timeOut to process the save when user enters data.
+        setTimeout(function() {
           $this.hasTime = false;
           $this.model.set("loan_amount", $(evt.target).val());
 
-          $this.collection.sort();
+          $this.model.requestBin();
 
+          // Ok, so we have altered the data, so now we 
+          // force the collection to sort and render.
+
+          $this.collection.sort();
         }, 200);
       }
 
     },
+
+    // This function is used by the LayoutManager
+    // to filter the model before it goes into the 
+    // render function.
 
     serialize: function() {
       return {
@@ -58,7 +76,8 @@ function(app, Backbone) {
 
     initialize: function() {
 
-      this.table = this.options.table;
+      // Set the table into the model scope.
+      this.table = this.options.table,
 
       this.model.on("change", function() {
         this.render();
@@ -81,18 +100,11 @@ function(app, Backbone) {
       var $this = this;
 
       this.collection.each(function(item) {
-
-        console.log(item.id, this.selected);
-
-        item.dd = (this.selected == item.id);
-        console.log(item);
-        
         this.insertView(new Views.Item({
           model: item, 
           collection: $this.collection,
-          table: $this,
+          table: $this
         }));
-
       }, this);
 
       return manage(this).render();
