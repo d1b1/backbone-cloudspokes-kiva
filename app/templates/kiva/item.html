@@ -1,19 +1,16 @@
-<td>
-  here: <%= id %>
+
+<td <% if (className) { %>class="selected"<% } %>><%= id %></td>
+<td <% if (className) { %>class="selected"<% } %>><%= name %></td>
+<td <% if (className) { %>class="selected"<% } %>>
+  <%= activity %> - <%= use %>
 </td>
-<td>
-  <%= name %>
+<td <% if (className) { %>class="selected"<% } %>><%= status %></td>
+<td <% if (className) { %>class="selected"<% } %>>$<%= loan_amount %></td>
+<td <% if (className) { %>class="selected"<% } %>>
+  <% if (town) {%><%= town %>,<br><% } %><%= country %>
 </td>
-<td>
-  <%= status %>
+<td <% if (className) { %>class="selected"<% } %>>
+  <input type="text" value="<%= pledge %>" name="">
 </td>
-<td>
-  $<%= loan_amount %>
-</td>
-<td>
-  <%= country %>
-</td>
-<td>
-  <input type="text" value="<%= loan_amount %>" name="">
-</td>
+
 

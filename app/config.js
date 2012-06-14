@@ -24,5 +24,6 @@ require.config({
     "plugins/backbone.layoutmanager": {
       deps: ["backbone"]
     }
+
   }
 });

@@ -18,28 +18,45 @@ function(app, $, Backbone, Kiva) {
     },
 
     index: function() {
+      // create a collection.
       var list = new Kiva.List();
+
+      window.theData = list;
 
       // Create a new layout.
       var main = new Backbone.LayoutManager({
         template: "main",
 
         views: {
-          ".list": new Kiva.Views.List({
+          ".kivatableHolder": new Kiva.Views.List({
             collection: list
           })
 
         }
       });
 
-      // Attach to the DOM
       main.$el.appendTo("#main");
 
-      // Render
+      // Render the main.
       main.render();
 
       // Fetch the data from localStorage
       list.fetch();
+
+      $('.kivaTable').prepend( $('<thead class="theader">\
+                                   <tr>\
+                                    <th width="5%">Loan</th>\
+                                    <th width="15%">Name</th>\
+                                    <th width="30%">Activity</th>\
+                                    <th width="10%">State</th>\
+                                    <th width="5%">Amount</th>\
+                                    <th width="20%">Location</th>\
+                                    <th width="15%" >Pledge</th>\
+                                   </tr>\
+                                  </thead>')
+                                 );
+
+      $('html,body').animate({scrollTop: $('.selected').position.top},'slow');
 
     }
   });
