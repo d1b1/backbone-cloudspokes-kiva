@@ -5,17 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>CloudSpokes.com - Kiva + Backbone.js (d1b1)</title>
+  <title>CloudSpokes.com - Kiva Code Contest w/Require.js + Grunt.js + Backbone.js)</title>
 
   <!-- Application styles -->
-  <link href="assets/twitter-bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
   <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
   </style>
 
-  <link href="assets/twitter-bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
 </head>
 
@@ -40,10 +40,19 @@
       </div>
     </div>
 
+   <div class="hidden-tablet nav-collapse hidden-phone">
+      <a href="https://github.com/d1b1/cloudspokes-backbonejs-kiva" class="hidden-tablet hidden-phone"><img style="z-index: 3000; position: absolute; top: 0; right: 0; border: 0;" class="hidden-tablet hidden-phone" src="/assets/img/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    </div>
+
     <div class="container">
 
-  
-        <div role="main" id="main"></div>
+      <div role="main" id="main" class="row"></div>
+
+      <hr>
+      
+      <footer>
+        &copy; 2012 - Stephan Smith (d1b1)
+      </footer>
 
     </div>
 
@@ -53,5 +62,20 @@
        of the app for the page.
     -->
   <script data-main="/app/config" src="/assets/js/libs/require.js"></script>
+
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-33988005-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+  
 </body>
 </html>

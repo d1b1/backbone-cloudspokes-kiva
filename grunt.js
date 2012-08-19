@@ -60,8 +60,7 @@ module.exports = function(grunt) {
     // only want to load one stylesheet in index.html.
     mincss: {
       "dist/release/index.css": [
-        "assets/css/h5bp.css",
-        "assets/css/style.css"
+        "assets/bootstrap/css/bootstrap.css"
       ]
     },
 
@@ -130,6 +129,9 @@ module.exports = function(grunt) {
     }
 
   });
+
+  grunt.loadNpmTasks('grunt-contrib');
+  grunt.loadNpmTasks('grunt-requirejs');
 
   // The default task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the underscore templates into
