@@ -1,11 +1,8 @@
 define([
   "app",
-
-  // Libs
   "backbone"
 ],
-
-function(app, Backbone) {
+function(app, Bb) {
   
   var Views = {};
 
@@ -14,7 +11,23 @@ function(app, Backbone) {
 
   var selectedModel = 0;
 
-  Views.Item = Backbone.View.extend({
+  Views.Notes = Bb.View.extend({
+    template: "kiva/notes",
+    tagName: 'p',
+
+    // bind the methods to form elements.
+    events: {
+      "click .moreNotes"   : function(evt, ui) {
+        $('.notes').toggle();
+      }
+    },
+  });
+
+  // Setup a view to handle each item or tr. Each tr
+  // maps to a visible model in the JSON collection of
+  // kiva loans.
+
+  Views.Item = Bb.View.extend({
     template: "kiva/item",
 
     tagName: 'tr',
@@ -55,7 +68,9 @@ function(app, Backbone) {
     // Sets a default values for the model.
     hasTime: false,
 
-    // This function is bound to the input onKeyDown.
+    // This function is bound to the input onKeyDown. This seems
+    // like a candidate for a helper function or light validation
+    // setup. 
     onKeyDown: function(evt, ui) {
 
       var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -65,6 +80,11 @@ function(app, Backbone) {
 
       return true;
     },
+
+    // This handles the on Key Up event and does to things, prevents
+    // the entry of non-numeric values, as well as save the changes
+    // to a model. It uses a timeout to debounce the model save and
+    // collection sort and table render.
 
     onKeyUp: function(evt, ui) {
 
@@ -126,20 +146,12 @@ function(app, Backbone) {
       // Set the table into the model scope.
       this.table = this.options.table;
 
-      // this.model.on("change", function() {
-      //   this.render();
-      // }, this);
-
-      // this.model.on("destroy", function() {
-      //   this.remove();
-      // }, this);
-
     },
 
   });
 
   // Define the base Table for the display of the data.
-  Views.List = Backbone.View.extend({
+  Views.List = Bb.View.extend({
     tagName: "table",
 
     className: "kivaTable",
@@ -148,6 +160,12 @@ function(app, Backbone) {
     events: {
       "click .savebutton": "saveKivaPledges"
     },
+
+    // This method handles the collection and posting of the 
+    // users loan and pledge amounts to the requestb.in. It will
+    // only post data when at least one load pledge had been entered.
+    // The save button should really use a collection method to change
+    // its state, but its late...
 
     saveKivaPledges: function() {
 
@@ -158,10 +176,13 @@ function(app, Backbone) {
          }
       });
 
-
       if (data.length==0) {
         $('.message').html('<font color=red>Sorry, you need to pledge a bit a of green first...</font>').fadeOut(5000);
       } else {
+
+        // Not a great solution. The Requestb.in site really needs 
+        // better examples. God I hate messing with cross domain issues.
+        // There must be a better way!
 
         $.post('http://requestb.in/1i9g7vo1?jsonp=pledgeData',
           JSON.stringify(data),
@@ -172,6 +193,10 @@ function(app, Backbone) {
       }
 
     },
+
+    // This is an extension of the BB render function for a view. It 
+    // uses the attached collection and renders individual view for each
+    // model in the collection. 
 
     render: function(manage) {
 
@@ -193,12 +218,18 @@ function(app, Backbone) {
 
       }, this);
 
+      // Returns the manage method for the view render.
       return manage(this).render();
     },
 
     initialize: function() {
       
       var $this = this;
+
+      // More table work arounds. This is not the greatest place
+      // to bind the save button to a view method. Keeping the save
+      // bound to this view makes sense, but the use of a table makes
+      // the bb tagName smell off. 
 
       $('.savebutton').live('click', function() {
         $this.saveKivaPledges();
@@ -218,6 +249,10 @@ function(app, Backbone) {
           $('html,body').animate();
 
 
+          // Simple way to keep the users in the flow of editing the 
+          // loan amounts. This will set the focus and keep the browser
+          // from selecting the entire value of the input element. 
+
           $(".selected input").focus().val($(".selected input").val());
         }
 
@@ -225,6 +260,9 @@ function(app, Backbone) {
 
     }
   });
+
+  // Ok we have our module views in a single namespace. So roll it
+  // back to the previous AMD call.
 
   return Views;
 });

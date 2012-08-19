@@ -1,31 +1,17 @@
-Backbone Boilerplate
+Cloudspokes.com - Kiva + Backbone.js Challenge
 ====================
 
-This boilerplate is the product of much research and frustration.  Existing
-boilerplates freely modify Backbone core, lack a build process, and are
-very prescriptive; this boilerplate changes that.
+This code was submitted for a code contest on Cloudspokes. The requirements
+of the challenge was to build a client site MVC using backbone.js that will
+fetch and render loan data from kiva. The UI provides user the ability to review
+the individual loan details and enter pledge amounts. The UI will sort the 
+pledges from highest to lowest and provides the ability to submit the data on
+requestb.in.
 
-Organize your application in a logical filesystem, develop your
-Models/Collections/Views/Routers inside modules, and build knowing you have
-efficient code that will not bottleneck your users.
+Attribution - The code on this project is based on the backbone boilerplate project
+hosted on github. Thanks to the team of developer who are working the grunt bbb
+project. 
 
-Thanks to our
-[Contributors](https://github.com/tbranyen/backbone-boilerplate/contributors)!
+https://github.com/tbranyen/backbone-boilerplate/contributors
 
-Special Thanks to: [cowboy](http://github.com/cowboy),
-[iros](http://github.com/iros), [nimbupani](http://github.com/nimbupani),
-[wookiehangover](http://github.com/wookiehangover), and
-[jugglinmike](http://github.com/jugglinmike)
-
-## Documentation ##
-
-View the Backbone Boilerplate documentation here:
-
-[GitHub Wiki](https://github.com/tbranyen/backbone-boilerplate/wiki)
-
-## Build process ##
-
-To use the new and improved build process, please visit the 
-[grunt-bbb](https://github.com/backbone-boilerplate/grunt-bbb)
-plugin repo and follow the instructions to install.  Basing your project off
-this repo will allow the `bbb` commands to work out-of-the-box.
+Thanks

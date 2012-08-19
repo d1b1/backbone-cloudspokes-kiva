@@ -1,6 +1,6 @@
-// Set the require.js configuration for your application.
+// Set the Require.js elements.
 require.config({
-  // Initialize the application with the main application file
+  // Setup the Main application file
   deps: ["main"],
 
   paths: {
@@ -19,11 +19,9 @@ require.config({
       deps: ["lodash", "jquery"],
       exports: "Backbone"
     },
-
     // Add the Backbone LocalStorage plugin in
     "plugins/backbone.layoutmanager": {
       deps: ["backbone"]
     }
-
   }
 });
